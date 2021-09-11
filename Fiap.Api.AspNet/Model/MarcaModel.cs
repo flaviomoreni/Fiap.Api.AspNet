@@ -9,9 +9,9 @@ namespace Fiap.Api.AspNet.Models
     {
 
         [Key]
-        [Column("IdMarca")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MarcaId { get; set; }
+
 
         [Required]
         [MaxLength(30)]

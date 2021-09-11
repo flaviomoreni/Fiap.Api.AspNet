@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Fiap.Api.AspNet.Model
 {
+
+    [Table("FiapUsuario")]
     public class UsuarioModel
     {
         public UsuarioModel()
@@ -29,8 +31,9 @@ namespace Fiap.Api.AspNet.Model
         [MaxLength(30)]
         public string Regra { get; set; }
 
-        public UsuarioModel(string nomeUsuario, string senha, string regra)
+        public UsuarioModel(int id, string nomeUsuario, string senha, string regra)
         {
+            UsuarioId = id;
             NomeUsuario = nomeUsuario;
             Senha = senha;
             Regra = regra;

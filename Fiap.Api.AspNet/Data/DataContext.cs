@@ -63,9 +63,9 @@ namespace Fiap.Api.AspNet.Data
 
 
             modelBuilder.Entity<UsuarioModel>().HasData(
-                new UsuarioModel("Admin Senior", "123456", "Senior"),
-                new UsuarioModel("Admin Pleno", "123456", "Pleno"),
-                new UsuarioModel("Admin Junior", "123456", "Junior")
+                new UsuarioModel(1,"Admin Senior", "123456", "Senior"),
+                new UsuarioModel(2,"Admin Pleno", "123456", "Pleno"),
+                new UsuarioModel(3,"Admin Junior", "123456", "Junior")
             );
 
 
