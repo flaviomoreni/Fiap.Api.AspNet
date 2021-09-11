@@ -1,4 +1,5 @@
 using Fiap.Api.AspNet.Data;
+using Fiap.Api.AspNet.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,11 +30,18 @@ namespace Fiap.Api.AspNet
         {
             services.AddControllers();
 
+            services.Configure<ApiBehaviorOptions>(options => { 
+                options.SuppressModelStateInvalidFilter = true; 
+            });
+
             var connectionString = Configuration.GetConnectionString("databaseUrl");
             services.AddDbContext<DataContext>(
                 option => option.UseSqlServer(connectionString)
                                 .EnableSensitiveDataLogging()
                                 .LogTo(Console.Write));
+
+
+            services.AddScoped<IMarcaRepository, MarcaRepository>();
 
         }
 
