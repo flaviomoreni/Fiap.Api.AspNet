@@ -1,4 +1,5 @@
-﻿using Fiap.Api.AspNet.Models;
+﻿using Fiap.Api.AspNet.Model;
+using Fiap.Api.AspNet.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -20,6 +21,7 @@ namespace Fiap.Api.AspNet.Data
         public DbSet<CategoriaModel> Categoria {get; set;}
         public DbSet<MarcaModel> Marca { get; set; }
         public DbSet<ProdutoModel> Produto { get; set; }
+        public DbSet<UsuarioModel> Usuario { get; set; }
 
 
 
@@ -57,6 +59,13 @@ namespace Fiap.Api.AspNet.Data
 
             modelBuilder.Entity<ProdutoModel>().HasData(
                 new ProdutoModel(1,"iPhone 12","SKUIPH12","Apple iPhone 12",5000, "", DateTime.Now, 1 , 1)
+            );
+
+
+            modelBuilder.Entity<UsuarioModel>().HasData(
+                new UsuarioModel("Admin Senior", "123456", "Senior"),
+                new UsuarioModel("Admin Pleno", "123456", "Pleno"),
+                new UsuarioModel("Admin Junior", "123456", "Junior")
             );
 
 
