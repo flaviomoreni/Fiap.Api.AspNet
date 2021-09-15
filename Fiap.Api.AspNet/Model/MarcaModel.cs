@@ -4,14 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fiap.Api.AspNet.Models
 {
-    [Table("FiapMarca")]
+    [Table("Marcas")]
     public class MarcaModel
     {
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MarcaId { get; set; }
-
 
         [Required]
         [MaxLength(30)]

@@ -1,55 +1,73 @@
 ﻿using Fiap.Api.AspNet.Data;
 using Fiap.Api.AspNet.Models;
+using Fiap.Api.AspNet.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fiap.Api.AspNet.Repository
 {
     public class MarcaRepository : IMarcaRepository
     {
+        private readonly DataContext _context;
 
-        private readonly DataContext context;
- 
-        public MarcaRepository(DataContext _context)
+        public MarcaRepository(
+            DataContext context)
         {
-            this.context = _context;
+            _context = context;
         }
 
         public IList<MarcaModel> FindAll()
         {
-            return context.Marca.AsNoTracking().ToList();
+            return _context.Marcas.AsNoTracking().ToList();
         }
+
+        public int Count()
+        {
+            return _context.Marcas.Count();
+        }
+
+        
+        public IList<MarcaModel> FindAll(int pagina, int tamanho)
+        {
+            IList<MarcaModel> listaMarcas = _context.Marcas
+                                .Skip(tamanho * pagina)
+                                .Take(tamanho)
+                                .ToList();
+
+            return listaMarcas;
+        }
+        
+
 
         public MarcaModel FindById(int id)
         {
-            return context.Marca.AsNoTracking().FirstOrDefault( m => m.MarcaId == id) ;
+            return _context.Marcas.FirstOrDefault(x => x.MarcaId == id);
         }
 
         public int Insert(MarcaModel marcaModel)
         {
-            context.Marca.Add(marcaModel);
-            context.SaveChanges();
+            _context.Marcas.Add(marcaModel);
+            _context.SaveChanges();
             return marcaModel.MarcaId;
         }
 
         public void Update(MarcaModel marcaModel)
         {
-            context.Marca.Update(marcaModel);
-            context.SaveChanges();
+            _context.Marcas.Update(marcaModel);
+            _context.SaveChanges();
         }
-
-
         public void Delete(int id)
         {
-            MarcaModel m = new MarcaModel()
+            var marca = new MarcaModel()
             {
                 MarcaId = id
             };
 
-            context.Marca.Remove(m);
-            context.SaveChanges();
+            _context.Marcas.Remove(marca);
+            _context.SaveChanges();
         }
+
+        
     }
 }

@@ -2,7 +2,10 @@
 
 namespace Fiap.Api.AspNet.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [ApiVersion("3.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase
     {
